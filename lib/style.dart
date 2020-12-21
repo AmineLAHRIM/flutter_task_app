@@ -5,23 +5,26 @@ class AppTheme {
   static const Color appBackgroundColor = Color(0xFFFFF7EC);
   static const Color topBarBackgroundColor = Color(0xFFFFD974);
   static const Color selectedTabBackgroundColor = Color(0xFFFFC442);
-  static const Color primary = Color(0xFF64BA02);
-  static const Color secondary = Color(0xFFF5F8FD);
+  static const Color primary = Color(0xFF147BDF);
+  static Color secondary = Color(0xFF0763BD).withOpacity(0.5);
   static const Color danger = Color(0xFFE02020);
   static const Color success = Color(0xFF6DD400);
   static const Color warning = Color(0xFFF7B500);
   static const Color info = Color(0xFF0095FF);
-  static const Color headlineTextColor = Color(0xFF1C1D20);
-  static const Color subTitleTextColor = Color(0xFF707586);
+  static const List<Color> taskColors = [Color(0xFF53D7FF),Color(0xFFFF66B8),Color(0xFF07E079)];
+  static const Color headlineTextColor = Colors.black;
+  static const Color subTitleTextColor = Color(0xFF9B9B9B);
   static const Color bg = Color(0xFFFFFFFF);
-  static const Color secondaryBg = Color(0xFFF5F8FD);
+  static const Color secondaryBg = Color(0xFFFFD053);
   static Color shadow = Color(0xFF191818);
   static  Color borderCard = Color(0xFF707070).withOpacity(0.5);
   static const Color fb = Color(0xFF0041A8);
   static const Color twitter = Color(0xFF42AAFF);
   static const Color google = Color(0xFFF2F8FF);
   static const Color footertext = Color(0xFFC5CEE0);
-  static const double radius = 10.0;
+  static const Color gradient1 = Color(0xFF1DA1F3);
+  static const Color gradient2 = Color(0xFF4173CC);
+  static const double radius = 5.0;
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: AppTheme.bg,
@@ -67,31 +70,30 @@ class AppTheme {
   );
 
   static final TextStyle _headline1 = TextStyle(
-    color: AppTheme.headlineTextColor,
-    fontFamily: "DellaRespira",
-    fontSize: 48,
-  );
-  static final TextStyle _headline2 = TextStyle(
-    fontFamily: "Lato",
-    color: AppTheme.headlineTextColor,
-    fontSize: 32,
-  );
-  static final TextStyle _headline3 = TextStyle(
-    color: AppTheme.headlineTextColor,
-    fontFamily: "Lato",
+    color: Colors.black,
+    fontFamily: "Poppins",
     fontSize: 24,
   );
-  static final TextStyle _headline4 = TextStyle(
-    color: AppTheme.headlineTextColor,
-    fontWeight: FontWeight.w900,
-    fontFamily: "Lato",
+  static final TextStyle _headline2 = TextStyle(
+    fontFamily: "Poppins",
+    color: Colors.black,
+    fontWeight: FontWeight.w500,
     fontSize: 18,
   );
-  static final TextStyle _headline5 = TextStyle(
-    color: AppTheme.headlineTextColor,
-    fontWeight: FontWeight.w900,
-    fontFamily: "Lato",
+  static final TextStyle _headline3 = TextStyle(
+    fontFamily: "Poppins",
+    color: Colors.black,
+    fontSize: 18,
+  );
+  static final TextStyle _headline4 = TextStyle(
+    fontFamily: "Poppins",
+    color: AppTheme.subTitleTextColor,
     fontSize: 16,
+  );
+  static final TextStyle _headline5 = TextStyle(
+    fontFamily: "Poppins",
+    color: Colors.black,
+    fontSize: 14,
   );
   static final TextStyle _headline6 = TextStyle(
     color: AppTheme.subTitleTextColor,
@@ -149,8 +151,11 @@ class AppTheme {
   );
 
   static final SystemUiOverlayStyle systemUiTrans = SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.white,
+    systemNavigationBarColor: AppTheme.primary,
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
+
   );
+
+
 }
