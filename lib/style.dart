@@ -16,7 +16,7 @@ class AppTheme {
   static const Color subTitleTextColor = Color(0xFF9B9B9B);
   static const Color bg = Color(0xFFFFFFFF);
   static const Color secondaryBg = Color(0xFFFFD053);
-  static Color shadow = Color(0xFF191818);
+  static Color shadow = Color(0xFFBCBCBC).withOpacity(0.5);
   static  Color borderCard = Color(0xFF707070).withOpacity(0.5);
   static const Color fb = Color(0xFF0041A8);
   static const Color twitter = Color(0xFF42AAFF);
