@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:task_app/login_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:task_app/pages/home_screen.dart';
+import 'package:task_app/pages/login_screen.dart';
+import 'package:task_app/services/user_service.dart';
 import 'package:task_app/size_config.dart';
 import 'package:task_app/style.dart';
 
@@ -12,6 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(AppTheme.systemUiTrans);
     // this will prevent change oriontation
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -23,13 +27,19 @@ class MyApp extends StatelessWidget {
         return OrientationBuilder(
           builder: (context, orientation) {
             SizeConfig().init(constraints, orientation);
-            return MaterialApp(
-              theme: AppTheme.lightTheme,
-              debugShowCheckedModeBanner: false,
-              home: LoginScreen(),
-              routes: {
-                LoginScreen.routeName: (ctx) => LoginScreen(),
-              },
+            return MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (context) => UserService(),),
+              ],
+              child: MaterialApp(
+                theme: AppTheme.lightTheme,
+                debugShowCheckedModeBanner: false,
+                home: LoginScreen(),
+                routes: {
+                  LoginScreen.routeName: (ctx) => LoginScreen(),
+                  HomeScreen.routeName: (ctx) => HomeScreen(),
+                },
+              ),
             );
           },
         );

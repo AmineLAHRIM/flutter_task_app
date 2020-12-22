@@ -8,7 +8,7 @@ class AppTheme {
   static const Color primary = Color(0xFF147BDF);
   static Color secondary = Color(0xFF0763BD).withOpacity(0.5);
   static const Color danger = Color(0xFFE02020);
-  static const Color success = Color(0xFF6DD400);
+  static const Color success = Color(0xFF07E079);
   static const Color warning = Color(0xFFF7B500);
   static const Color info = Color(0xFF0095FF);
   static const List<Color> taskColors = [Color(0xFF53D7FF),Color(0xFFFF66B8),Color(0xFF07E079)];
