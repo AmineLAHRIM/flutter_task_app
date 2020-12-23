@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task_app/constant.dart';
 import 'package:task_app/models/user.dart';
 
@@ -41,6 +42,8 @@ class UserService extends ChangeNotifier {
         dynamic data = json.decode(response.body);
         User currentUser = User.fromJson(data);
         this.currentUser=currentUser;
+        saveUserMemory();
+
         return currentUser;
       } else {
         throw Exception('No Data Found');
@@ -49,6 +52,12 @@ class UserService extends ChangeNotifier {
       return null;
     }
 
+  }
+
+  Future<void> saveUserMemory() async {
+    //set SharedPreferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('userId', currentUser.id,);
   }
 
   Future<User> findById(int id) async {
@@ -81,6 +90,8 @@ class UserService extends ChangeNotifier {
       throw Exception('No Data Found');
     }
   }
+
+
 
   Future<User> update(int id, User user) async {
     var response = await http.put(Constant.REST_URL + '/user/' + id.toString(),

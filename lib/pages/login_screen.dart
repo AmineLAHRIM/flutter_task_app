@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task_app/models/user.dart';
 import 'package:task_app/pages/home_screen.dart';
 import 'package:task_app/services/user_service.dart';
@@ -23,158 +24,155 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isInit = true;
   UserService userService;
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    if (isInit) {
-      userService = Provider.of<UserService>(context);
-    }
-    isInit = false;
+    userService = Provider.of<UserService>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.primary,
-      body: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          height: SizeConfig.screenHeight,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                transform: GradientRotation(90),
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  AppTheme.gradient1,
-                  AppTheme.gradient2,
-                ]),
-          ),
-          child: Column(
-            children: [
-              Spacer(flex: 8),
-              Expanded(
-                  flex: 10,
-                  child: Container(
-                    child: Text(
-                      'W',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontFamily: 'Pacifico',
-                      ),
-                    ),
-                  )),
-              Spacer(flex: 2),
-              Expanded(
-                  flex: 31,
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: SvgPicture.asset('assets/images/onboarding_img.svg'),
-                  )),
-              Spacer(flex: 2),
-              Expanded(
-                  flex: 6,
-                  child: Container(
-                    margin: EdgeInsets.only(left: 24),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Stack(
-                            children: [
-                              Text(
-                                'Sign Up',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                        color: isLogin
-                                            ? Colors.white
-                                            : AppTheme.secondaryBg),
-                              ),
-                              Positioned.fill(
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                    splashColor:
-                                        AppTheme.shadow.withOpacity(0.1),
-                                    onTap: () {
-                                      setState(() {
-                                        isLogin = false;
-                                        pageViewController.previousPage(
-                                            duration:
-                                                Duration(milliseconds: 500),
-                                            curve: Curves.linearToEaseOut);
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Flexible(
-                          child: Container(
-                            margin: EdgeInsets.only(left: 16),
-                            child: Stack(
-                              children: [
-                                Text(
-                                  'Login',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline2
-                                      .copyWith(
-                                          color: isLogin
-                                              ? AppTheme.secondaryBg
-                                              : Colors.white),
-                                ),
-                                Positioned.fill(
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: InkWell(
-                                      splashColor:
-                                          AppTheme.shadow.withOpacity(0.1),
-                                      onTap: () {
-                                        setState(() {
-                                          isLogin = true;
-                                          pageViewController.nextPage(
-                                              duration:
-                                                  Duration(milliseconds: 500),
-                                              curve: Curves.linearToEaseOut);
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
+            backgroundColor: AppTheme.primary,
+            body: SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                height: SizeConfig.screenHeight,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      transform: GradientRotation(90),
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppTheme.gradient1,
+                        AppTheme.gradient2,
+                      ]),
+                ),
+                child: Column(
+                  children: [
+                    Spacer(flex: 8),
+                    Expanded(
+                        flex: 10,
+                        child: Container(
+                          child: Text(
+                            'W',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                              fontFamily: 'Pacifico',
                             ),
                           ),
-                        )
-                      ],
+                        )),
+                    Spacer(flex: 2),
+                    Expanded(
+                        flex: 31,
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: SvgPicture.asset(
+                              'assets/images/onboarding_img.svg'),
+                        )),
+                    Spacer(flex: 2),
+                    Expanded(
+                        flex: 6,
+                        child: Container(
+                          margin: EdgeInsets.only(left: 24),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Stack(
+                                  children: [
+                                    Text(
+                                      'Sign Up',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline2
+                                          .copyWith(
+                                              color: isLogin
+                                                  ? Colors.white
+                                                  : AppTheme.secondaryBg),
+                                    ),
+                                    Positioned.fill(
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          splashColor:
+                                              AppTheme.shadow.withOpacity(0.1),
+                                          onTap: () {
+                                            setState(() {
+                                              isLogin = false;
+                                              pageViewController.previousPage(
+                                                  duration: Duration(
+                                                      milliseconds: 500),
+                                                  curve:
+                                                      Curves.linearToEaseOut);
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 16),
+                                  child: Stack(
+                                    children: [
+                                      Text(
+                                        'Login',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline2
+                                            .copyWith(
+                                                color: isLogin
+                                                    ? AppTheme.secondaryBg
+                                                    : Colors.white),
+                                      ),
+                                      Positioned.fill(
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            splashColor: AppTheme.shadow
+                                                .withOpacity(0.1),
+                                            onTap: () {
+                                              setState(() {
+                                                isLogin = true;
+                                                pageViewController.nextPage(
+                                                    duration: Duration(
+                                                        milliseconds: 500),
+                                                    curve:
+                                                        Curves.linearToEaseOut);
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                    Spacer(flex: 2),
+                    Container(
+                      height: 250,
+                      child: LoginPageView(
+                          userService: userService,
+                          pageViewController: pageViewController),
                     ),
-                  )),
-              Spacer(flex: 2),
-              Container(
-                height: 250,
-                child: LoginPageView(
-                    userService: userService,
-                    pageViewController: pageViewController),
+                    Spacer(flex: 6),
+                  ],
+                ),
               ),
-              Spacer(flex: 6),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
+
+
 }
 
 class LoginPageView extends StatelessWidget {
@@ -198,7 +196,11 @@ class LoginPageView extends StatelessWidget {
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty) {
-      ShowSnackBar(context: context,text: "Please fill the information",bgColor: AppTheme.danger).show();
+      ShowSnackBar(
+              context: context,
+              text: "Please fill the information",
+              bgColor: AppTheme.danger)
+          .show();
 
       return;
     }
@@ -218,8 +220,11 @@ class LoginPageView extends StatelessWidget {
           snackBarText = 'Email Already Exists!';
         }
 
-        ShowSnackBar(context: context,text: snackBarText,bgColor: value > 0 ? AppTheme.success : AppTheme.danger).show();
-
+        ShowSnackBar(
+                context: context,
+                text: snackBarText,
+                bgColor: value > 0 ? AppTheme.success : AppTheme.danger)
+            .show();
       });
     }
   }
@@ -229,7 +234,11 @@ class LoginPageView extends StatelessWidget {
     print('user value loginPasswordController' + loginPasswordController.text);
     if (loginEmailController.text.isEmpty ||
         loginPasswordController.text.isEmpty) {
-      ShowSnackBar(context: context,text: 'Please fill the informations',bgColor: AppTheme.danger).show();
+      ShowSnackBar(
+              context: context,
+              text: 'Please fill the informations',
+              bgColor: AppTheme.danger)
+          .show();
 
       return;
     }
@@ -241,13 +250,16 @@ class LoginPageView extends StatelessWidget {
         String snackBarText;
         if (value != null) {
           snackBarText = 'Login Succusfully!';
-          Navigator.pushNamed(context, HomeScreen.routeName);
+          Navigator.pushReplacementNamed(context, HomeScreen.routeName,
+              arguments: value.id);
         } else {
           snackBarText = 'Email Already Exists!';
         }
-
-        ShowSnackBar(context: context,text: snackBarText,bgColor: value != null ? AppTheme.success : AppTheme.danger).show();
-
+        ShowSnackBar(
+                context: context,
+                text: snackBarText,
+                bgColor: value != null ? AppTheme.success : AppTheme.danger)
+            .show();
       });
     } else {
       print('user value null');
@@ -492,7 +504,6 @@ class LoginPageView extends StatelessWidget {
                           splashFactory: InkRipple.splashFactory,
                           splashColor: AppTheme.shadow.withOpacity(0.1),
                           onTap: () {
-                            print('user value onTap');
                             login(context);
                           },
                         ),
@@ -507,6 +518,4 @@ class LoginPageView extends StatelessWidget {
       ],
     );
   }
-
-
 }

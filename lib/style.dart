@@ -88,8 +88,8 @@ class AppTheme {
   );
   static final TextStyle _headline4 = TextStyle(
     fontFamily: "Poppins",
-    color: AppTheme.subTitleTextColor,
-    fontSize: 16,
+    color: AppTheme.subTitleTextColor.withOpacity(0.6),
+    fontSize: 14,
   );
   static final TextStyle _headline5 = TextStyle(
     fontFamily: "Poppins",

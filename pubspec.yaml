@@ -32,6 +32,7 @@ dependencies:
   align_positioned: ^1.2.14
   dotted_border: ^1.0.7
   eva_icons_flutter: ^2.0.1
+  shared_preferences: ^0.5.12+4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

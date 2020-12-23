@@ -1,3 +1,4 @@
+import 'package:align_positioned/align_positioned.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/foundation.dart';
@@ -35,172 +36,227 @@ class _TaskItemState extends State<TaskItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 280,
       margin: EdgeInsets.only(right: 16, top: 8, bottom: 16),
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        elevation: 2,
-        shadowColor: AppTheme.shadow,
-        margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppTheme.radius)),
+      child: AspectRatio(
+        aspectRatio: 1.6/1,
         child: Stack(
           children: [
-            Container(
-                margin: EdgeInsets.symmetric(vertical: 16, horizontal: 0),
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 20,
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 80,
-                              child: Text(
-                                widget.currentTask.name,
-                                style: Theme.of(context).textTheme.headline2,
-                              ),
-                            ),
-                            Expanded(
-                              flex: 20,
-                              child: Icon(
-                                EvaIcons.moreHorizotnal,
-                                color: AppTheme.subTitleTextColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 50,
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: users.length,
-                          itemBuilder: (context, index) {
-                            var currentUser = users[index];
-                            return Container(
-                              height: double.infinity,
-                              child: AspectRatio(
-                                aspectRatio: 1 / 1,
-                                child: Card(
-                                  elevation: 0,
-                                  clipBehavior: Clip.antiAlias,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          AppTheme.radius)),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    child: CachedNetworkImage(
-                                      imageUrl: currentUser.imageUrl,
-                                      fit: BoxFit.cover,
+            Card(
+              clipBehavior: Clip.antiAlias,
+              elevation: 2,
+              shadowColor: AppTheme.shadow,
+              margin: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radius)),
+              child: Stack(
+                children: [
+                  Container(
+                      margin: EdgeInsets.symmetric(vertical: 16, horizontal: 0),
+                      child: Column(
+                        children: [
+                          Flexible(
+                            flex: 20,
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    flex: 80,
+                                    child: FittedBox(
+                                      child: Text(
+                                        widget.currentTask.name,
+                                        style:
+                                            Theme.of(context).textTheme.headline2,
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  Flexible(
+                                    flex: 20,
+                                    child: Icon(
+                                      EvaIcons.moreHorizotnal,
+                                      color: AppTheme.subTitleTextColor,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    Container(
-                      child: Divider(
-                        color: AppTheme.shadow,
-                        thickness: 1,
-                      ),
-                    ),
-                    Expanded(
-                        flex: 30,
-                        child: Container(
-                          margin: EdgeInsets.only(top: 8, left: 16, right: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                flex: 40,
-                                child: Card(
-                                  elevation: 0,
-                                  color: widget.currentTask.status == null
-                                      ? AppTheme.primary
-                                      : AppTheme.taskStatusColors[
-                                          widget.currentTask.status.index],
-                                  clipBehavior: Clip.antiAlias,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          AppTheme.radius)),
-                                  child: Container(
-                                      width: double.infinity,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 50,
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 16),
+                              child: FractionallySizedBox(
+                                heightFactor: 0.6,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: users.length,
+                                  itemBuilder: (context, index) {
+                                    var currentUser = users[index];
+                                    return Container(
                                       height: double.infinity,
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        widget.currentTask.status == null
-                                            ? 'Task'
-                                            : describeEnum(
-                                                widget.currentTask.status),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline5
-                                            .copyWith(color: Colors.white),
-                                      )),
-                                ),
-                              ),
-                              Spacer(
-                                flex: 20,
-                              ),
-                              Expanded(
-                                flex: 40,
-                                child: Container(
-                                  width: double.infinity,
-                                  margin: EdgeInsets.only(right: 16),
-                                  child: FractionallySizedBox(
-                                    heightFactor: 0.6,
-                                    child: Row(
-                                      children: [
-                                        Expanded(flex: 20,child: FittedBox(child: Icon(EvaIcons.clock))),
-                                        Expanded(
-                                          flex: 80,
+                                      margin: EdgeInsets.only(
+                                          right: 8),
+                                      child: AspectRatio(
+                                        aspectRatio: 1 / 1,
+                                        child: Card(
+                                          elevation: 0,
+                                          margin: EdgeInsets.zero,
+                                          clipBehavior: Clip.antiAlias,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  AppTheme.radius)),
                                           child: Container(
                                             width: double.infinity,
-                                            alignment: Alignment.centerRight,
-                                            child: FittedBox(
-                                              child: Text(
-                                                DateFormat.d().format(
-                                                        widget.currentTask.date) +
-                                                    ' - ' +
-                                                    DateFormat.Hm().format(
-                                                        widget.currentTask.date),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline5,
-                                                maxLines: 1,
-                                              ),
+                                            height: double.infinity,
+                                            child: CachedNetworkImage(
+                                              imageUrl: currentUser.imageUrl,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ))
-                  ],
-                )),
-            Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  splashFactory: InkRipple.splashFactory,
-                  splashColor: AppTheme.shadow.withOpacity(0.1),
-                  onTap: () => null,
+                          Container(
+                            child: Divider(
+                              color: AppTheme.shadow,
+                              thickness: 1,
+                            ),
+                          ),
+                          Expanded(
+                              flex: 30,
+                              child: Container(
+                                alignment: Alignment.bottomCenter,
+                                margin:
+                                    EdgeInsets.only(left: 16, right: 16),
+                                child: FractionallySizedBox(
+                                  heightFactor: 0.65,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 40,
+                                        child: Card(
+                                          margin: EdgeInsets.zero,
+                                          elevation: 0,
+                                          color: widget.currentTask.status == null
+                                              ? AppTheme.primary
+                                              : AppTheme.taskStatusColors[
+                                                  widget.currentTask.status.index],
+                                          clipBehavior: Clip.antiAlias,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  AppTheme.radius)),
+                                          child: Container(
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              alignment: Alignment.center,
+                                              child: FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                child: Text(
+                                                  widget.currentTask.status == null
+                                                      ? 'Task'
+                                                      : describeEnum(
+                                                          widget.currentTask.status),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline5
+                                                      .copyWith(color: Colors.white),
+                                                ),
+                                              )),
+                                        ),
+                                      ),
+                                      Spacer(
+                                        flex: 20,
+                                      ),
+                                      Expanded(
+                                        flex: 40,
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: FractionallySizedBox(
+                                            heightFactor: 0.8,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Flexible(
+                                                    child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            right: 8),
+                                                        child: FittedBox(
+                                                            child: Icon(
+                                                                EvaIcons.clock)))),
+                                                Flexible(
+                                                  child: Container(
+                                                    child: FittedBox(
+                                                      child: Text(
+                                                        DateFormat.d().format(widget
+                                                                .currentTask.date) +
+                                                            ' - ' +
+                                                            DateFormat.Hm().format(
+                                                                widget.currentTask
+                                                                    .date),
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline5,
+                                                        maxLines: 1,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ))
+                        ],
+                      )),
+                  Positioned.fill(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        splashFactory: InkRipple.splashFactory,
+                        splashColor: AppTheme.shadow.withOpacity(0.1),
+                        onTap: () => null,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: 5,
+              alignment: Alignment.centerLeft,
+              child: FractionallySizedBox(
+                heightFactor: 0.7,
+                widthFactor: 1,
+                child: AlignPositioned(
+                  moveByContainerWidth: -0.5,
+                  touch: Touch.inside,
+                  child: Card(
+                    margin: EdgeInsets.zero,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100)),
+                    color: widget.currentTask.status == null
+                        ? AppTheme.primary
+                        : AppTheme
+                            .taskStatusColors[widget.currentTask.status.index],
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                  ),
                 ),
               ),
             ),
