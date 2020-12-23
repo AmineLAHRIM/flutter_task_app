@@ -7,16 +7,17 @@ part of 'user_task_detail.dart';
 // **************************************************************************
 
 UserTaskDetail _$UserTaskDetailFromJson(Map<String, dynamic> json) {
-  return UserTaskDetail()
-    ..id = json['id'] as int
-    ..users = (json['users'] as List)
+  return UserTaskDetail(
+    id: json['id'] as int,
+    users: (json['users'] as List)
         ?.map(
             (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..tasks = (json['tasks'] as List)
+        ?.toList(),
+    tasks: (json['tasks'] as List)
         ?.map(
             (e) => e == null ? null : Task.fromJson(e as Map<String, dynamic>))
-        ?.toList();
+        ?.toList(),
+  );
 }
 
 Map<String, dynamic> _$UserTaskDetailToJson(UserTaskDetail instance) =>

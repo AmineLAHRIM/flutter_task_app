@@ -40,6 +40,7 @@ class UserService extends ChangeNotifier {
       if (response.statusCode == 200) {
         dynamic data = json.decode(response.body);
         User currentUser = User.fromJson(data);
+        this.currentUser=currentUser;
         return currentUser;
       } else {
         throw Exception('No Data Found');

@@ -5,6 +5,7 @@ import 'package:task_app/pages/home_screen.dart';
 import 'package:task_app/pages/login_screen.dart';
 import 'package:task_app/services/task_service.dart';
 import 'package:task_app/services/user_service.dart';
+import 'package:task_app/services/user_task_detail_service.dart';
 import 'package:task_app/size_config.dart';
 import 'package:task_app/style.dart';
 
@@ -32,11 +33,12 @@ class MyApp extends StatelessWidget {
               providers: [
                 ChangeNotifierProvider(create: (context) => UserService(),),
                 ChangeNotifierProvider(create: (context) => TaskService(),),
+                ChangeNotifierProvider(create: (context) => UserTaskDetailService(),),
               ],
               child: MaterialApp(
                 theme: AppTheme.lightTheme,
                 debugShowCheckedModeBanner: false,
-                home: HomeScreen(),
+                home: LoginScreen(),
                 routes: {
                   LoginScreen.routeName: (ctx) => LoginScreen(),
                   HomeScreen.routeName: (ctx) => HomeScreen(),

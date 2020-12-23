@@ -7,24 +7,24 @@ part of 'task.dart';
 // **************************************************************************
 
 Task _$TaskFromJson(Map<String, dynamic> json) {
-  return Task()
-    ..id = json['id'] as int
-    ..name = json['name'] as String
-    ..date =
-        json['date'] == null ? null : DateTime.parse(json['date'] as String)
-    ..imageUrl = json['imageUrl'] as String
-    ..description = json['description'] as String
-    ..taskStatus = _$enumDecodeNullable(_$TaskStatusEnumMap, json['taskStatus'])
-    ..deleted = json['deleted'] as bool
-    ..userTaskDetail = (json['userTaskDetail'] as List)
+  return Task(
+    id: json['id'] as int,
+    name: json['name'] as String,
+    date: json['date'] == null ? null : DateTime.parse(json['date'] as String),
+    imageUrl: json['imageUrl'] as String,
+    description: json['description'] as String,
+    status: _$enumDecodeNullable(_$TaskStatusEnumMap, json['status']),
+    deleted: json['deleted'] as bool,
+    userTaskDetail: (json['userTaskDetail'] as List)
         ?.map((e) => e == null
             ? null
             : UserTaskDetail.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..users = (json['users'] as List)
+        ?.toList(),
+    users: (json['users'] as List)
         ?.map(
             (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
-        ?.toList();
+        ?.toList(),
+  );
 }
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
@@ -33,7 +33,7 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'date': instance.date?.toIso8601String(),
       'imageUrl': instance.imageUrl,
       'description': instance.description,
-      'taskStatus': _$TaskStatusEnumMap[instance.taskStatus],
+      'status': _$TaskStatusEnumMap[instance.status],
       'deleted': instance.deleted,
       'userTaskDetail':
           instance.userTaskDetail?.map((e) => e?.toJson())?.toList(),
