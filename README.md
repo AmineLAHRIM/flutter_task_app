@@ -2,7 +2,11 @@
 
 A new Flutter application.
 
-## Getting Started
+## Configuration
+
+1- go to project > and change constant.dart for the rest api url
+
+### Getting Started
 
 This project is a starting point for a Flutter application.
 
